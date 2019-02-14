@@ -1,0 +1,140 @@
+.carousel .layer,
+.carousel .caption-container {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+.carousel .layer {
+	opacity: .4;
+}
+
+.carousel .layer.dark {
+	background: #212121;
+}
+
+.carousel .layer.light {
+	background: #f5f5f5;
+}
+
+.carousel .slides {
+	position: relative;
+	width: 100%;
+	height: 100%;
+}
+
+.carousel .slides .slide {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	opacity: 0;
+	-webkit-transition: opacity linear 300ms;
+			transition: opacity linear 300ms;
+}
+
+.carousel .slides .slide.display {
+	opacity: 1;
+}
+
+.carousel .slides .slide .background {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+.carousel .slides .slide img.background {
+	object-position: 50% 50%;
+	object-fit: cover;
+}
+
+.carousel .slides .slide div.background {
+	background-position: 50% 50%;
+	background-size: cover;
+}
+
+.carousel .prev,
+.carousel .next {
+	position: absolute;
+	top: 50%;
+	width: 52px;
+	height: 52px;
+	border: 0;
+	background: none;
+	cursor: pointer;
+	-webkit-transform: translateY(-50%);
+		-ms-transform: translateY(-50%);
+			transform: translateY(-50%);
+}
+
+.carousel .prev:focus,
+.carousel .next:focus {
+	outline: 0;
+}
+
+.carousel .prev {
+	left: 12px;
+}
+
+.carousel .next {
+	right: 12px;
+}
+
+.carousel .prev::after,
+.carousel .next::after {
+	font-size: 2em;
+	color: #f5f5f5;
+	opacity: .4;
+	-webkit-transition: opacity 200ms ease-out;
+			transition: opacity 200ms ease-out;
+}
+
+.carousel .prev:hover::after,
+.carousel .next:hover::after {
+	opacity: .8;
+}
+
+.carousel .prev::after {
+	content: "\276E";
+}
+
+.carousel .next::after {
+	content: "\276F";
+}
+
+.carousel .indicators {
+	position: absolute;
+	bottom: 10px;
+	left: 50%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	-webkit-transform: translateX(-50%);
+		-ms-transform: translateX(-50%);
+			transform: translateX(-50%);
+}
+
+.carousel .indicators input[name="indicator"] {
+	display: none;
+}
+
+.carousel .indicators input[name="indicator"] + label {
+	position: relative;
+	width: 12px;
+	height: 12px;
+	margin: 0 4px;
+	display: inline-block;
+	border-radius: 100%;
+	background: #f5f5f5;
+	opacity: .4;
+	cursor: pointer;
+	-webkit-transition: opacity 200ms ease-out;
+			transition: opacity 200ms ease-out;
+}
+
+.carousel .indicators input[name="indicator"]:checked + label {
+	opacity: .8;
+}
