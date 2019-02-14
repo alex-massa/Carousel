@@ -6,7 +6,7 @@ Made unprofessionally for unprofessional use (but with ❤).
 Simply include the files `carousel.css` and `carousel.js` in your HTML document.  
 ```
 <link rel="stylesheet" href="carousel.css">
-<script src="carousel-js"></script>
+<script src="carousel.js"></script>
 ```
 
 ## Usage
