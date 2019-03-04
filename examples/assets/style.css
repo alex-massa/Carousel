@@ -1,10 +1,3 @@
-/**
- *
- * @author Alex Massa <alexmassa@outlook.it>
- * @licence MIT
- *
- */
-
 html,
 body {
 	width: 100%;
@@ -19,7 +12,7 @@ body {
 	height: 100%;
 }
 
-.caption {
+.caption span {
 	position: absolute;
 	top: 50%;
 	left: 50%;
@@ -37,7 +30,7 @@ body {
 
 @media (max-width: 576px) {
 
-	.caption {
+	.caption span {
 		font-size: 2.4rem;
 	}
 

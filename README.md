@@ -1,40 +1,26 @@
 # Carousel
 A simple carousel to use when your UI framework of choice doesn't provide one.  
-Made unprofessionally for unprofessional use (but with ❤).
+Made unprofessionally for unprofessional use (with ❤).
 
 ## Installation
-Simply include the files `carousel.css` and `carousel.js` in your HTML document.  
+Simply include the files `carousel.min.css` and `carousel.min.js` in your HTML document.  
 ```
-<link rel="stylesheet" href="carousel.css">
-<script src="carousel.js"></script>
+<link rel="stylesheet" href="carousel.min.css">
+<script src="carousel.min.js"></script>
 ```
 
 ## Usage
-Check any example document in the `examples` folder to get an idea on how to structure your carousel. Those are very basic, I promise.  
-You will have to define the size of the carousel yourself. Check the file `examples/assets/style.css` as a reference.  
-A single document can support multiple carousels in it.  
+Check any example document in the `examples` folder to get an idea on how to structure your carousel. The example are very basic and simple to understand.  
+The dimensions of a carousel must be manually defined by using CSS rules, or alternatively by assigning a class with a predefined width and height to its root element. Check the file `examples/assets/style.css` as a reference.  
+A single document can contain multiple carousels in it.  
 The root element of a carousel supports the following data attributes:
 * `data-type`
 	
-	Determines if a carousel should be detected automatically on document load. The only accepted value is `"carousel"`.  
+	Determines if a carousel should be detected and started automatically on document load. The only accepted value is `"carousel"`.  
 	Example: `<div class="carousel" data-type="carousel">...</div>`  
-	If not specified, the carousel will have to be defined manually in a separate JavaScript file. Example on how to do that:  
+	If not specified, the carousel must be created manually by using JavaScript. Example on how to do that (assuming that your carousel root has the attribute `id="my-carousel"`):  
 	```
-	let carousel = new Carousel(
-		document.getElementsByClassName('slide'),
-		document.getElementsByClassName('prev')[0],
-		document.getElementsByClassName('next')[0],
-		document.getElementsByName('indicator')
-	);
-	```
-	Or, if jQuery is used:  
-	```
-	let carousel = new Carousel(
-		$('.slide').toArray(),
-		$('.prev').get(0),
-		$('.next').get(0),
-		$('input[name="indicator"]').toArray()
-	);
+	let carousel = new Carousel(document.getElementById('my-carousel'));
 	```
 	The carousel can then be started by calling `start()` on the carousel object:  
 	```
@@ -53,7 +39,7 @@ The root element of a carousel supports the following data attributes:
 
 * `data-manual`	
 	
-	Determines if a carousel flow should be controlled only via the displayed controls. No values should be assigned to this attribute.  
+	Determines if a carousel flow should be controlled only via the displayed controls. No value should be assigned to this attribute.  
 	Example: `<div class="carousel" data-type="carousel" data-manual>...</div>`  
 	If not specified, the carousel will behave normally by flowing automatically. 
 
@@ -61,4 +47,4 @@ The root element of a carousel supports the following data attributes:
 	
 	Used to specify the delay, in milliseconds, between the transition from a slide to the next one. If not specified, a default delay of `3000` milliseconds will be applied.  
 	Example: `<div class="carousel" data-type="carousel" data-delay="4000">...</div>`  
-	This attribute will be ignored if `data-manual` is also specified.
+	If this attribute has a value assigned and the method `start()` is called with an integer parameter, the value of the parameter will override the value of the attribute.
