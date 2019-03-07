@@ -3,14 +3,14 @@
  * @licence MIT
  */
 
-// jshint esversion: 6
+ /*jshint esversion: 6 */
 
 const DEFAULT_INTERVAL_DELAY = 3000;
 
-window.onload = function() {
+window.onload = () => {
 	let carousels = document.querySelectorAll('[data-type="carousel"]');
 	if (carousels)
-		carousels.forEach(function(carousel) { new Carousel(carousel); });
+		carousels.forEach(carousel => new Carousel(carousel));
 };
 
 class Carousel {
@@ -25,16 +25,15 @@ class Carousel {
 
 		let prevButton = carousel.querySelector('[name="prev"]');
 		let nextButton = carousel.querySelector('[name="next"]');
-		let self = this;
 		
 		if (this.indicators)
-			this.indicators.forEach(function(indicator, slideIndex) {
-				indicator.onclick = function() { self.displaySlide(slideIndex); };
-			});
+			this.indicators.forEach((indicator, slideIndex) =>
+				indicator.onclick = () => this.displaySlide(slideIndex)
+			);
 		if (prevButton)
-			prevButton.onclick = function() { self.plusSlide(-1); };
+			prevButton.onclick = () => this.plusSlide(-1);
 		if (nextButton)
-			nextButton.onclick = function() { self.plusSlide(+1); };
+			nextButton.onclick = () => this.plusSlide(+1);
 		if ('manual' in carousel.dataset)
 			this.displaySlide(this.slideIndex);
 		else
@@ -43,16 +42,9 @@ class Carousel {
 	
 	displaySlide(slideIndex) {
 		clearInterval(this.carouselInterval);
-		slideIndex = ((slideIndex % this.slides.length) + this.slides.length) % this.slides.length;
-		this.slides[this.slideIndex].classList.remove('display');
-		this.slides[slideIndex].classList.add('display');
-		if (this.indicators && this.indicators.length !== 0)
-			this.indicators[slideIndex].checked = true;
-		this.slideIndex = slideIndex;
-		if (this.started) {
-			let self = this;
-			this.carouselInterval = setInterval(function() { self.plusSlide(+1); }, this.intervalDelay);
-		}
+		this._displaySlide(slideIndex);
+		if (this.started)
+			this.carouselInterval = setInterval(() => this.plusSlide(+1), this.intervalDelay);
 	}
 	
 	plusSlide(n) {
@@ -60,21 +52,22 @@ class Carousel {
 	}
 	
 	start(intervalDelay) {
-		if (this.started)
-			return;
-		this.intervalDelay = intervalDelay ? intervalDelay : DEFAULT_INTERVAL_DELAY;
-		this.carouselInterval = function(carousel) {
-			carousel.plusSlide(1);
-			carousel.carouselInterval = setInterval(function() {
-				carousel.carouselInterval(carousel);
-			}, carousel.intervalDelay);
-		};
+		this.intervalDelay = intervalDelay ? intervalDelay : (this.intervalDelay ? this.intervalDelay : DEFAULT_INTERVAL_DELAY);
 		this.started = true;
 		this.displaySlide(this.slideIndex);
 	}
 	
 	stop() {
 		this.started = false;
+	}
+
+	_displaySlide(slideIndex) {
+		slideIndex = ((slideIndex % this.slides.length) + this.slides.length) % this.slides.length;
+		this.slides[this.slideIndex].classList.remove('display');
+		this.slides[slideIndex].classList.add('display');
+		if (this.indicators && this.indicators.length !== 0)
+			this.indicators[slideIndex].checked = true;
+		this.slideIndex = slideIndex;
 	}
 
 }
