@@ -7,11 +7,11 @@
 
 const DEFAULT_INTERVAL_DELAY = 3000;
 
-window.onload = () => {
+window.addEventListener('load', () => {
 	let carousels = document.querySelectorAll('[data-type="carousel"]');
 	if (carousels)
 		carousels.forEach(carousel => new Carousel(carousel));
-};
+});
 
 class Carousel {
 
